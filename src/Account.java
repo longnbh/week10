@@ -1,16 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Account {
     public static final String CHECKING = "CHECKING";
     public static final String SAVINGS = "SAVINGS";
     protected long accountNumber;
     protected double balance;
-    protected List<Transaction> transactionList;
+    protected List<Transaction> transactionList = new ArrayList<>();
 
-    public Account() {
-        transactionList = new ArrayList<>();
-    }
+    public Account() {}
 
     /**Consturo.
      *
@@ -37,8 +36,7 @@ public abstract class Account {
      * @throws InvalidFundingAmountException exc
      * @throws InsufficientFundsException exc
      */
-    public void doWithdrawing(double amount) throws InvalidFundingAmountException,
-            InsufficientFundsException {
+    public void doWithdrawing(double amount) throws BankException {
         if (amount < 0) {
             throw new InvalidFundingAmountException(amount);
         } else if (amount > balance) {
@@ -83,11 +81,13 @@ public abstract class Account {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Account) {
-            Account account = (Account) obj;
-            return accountNumber == account.accountNumber;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-        return false;
+        if (!(o instanceof Account account) || (o == null)) {
+            return false;
+        }
+        return accountNumber == account.accountNumber;
     }
 }

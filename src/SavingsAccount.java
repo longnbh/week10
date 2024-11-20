@@ -22,12 +22,9 @@ public class SavingsAccount extends Account {
                     amount, balance + amount,
                     balance);
             super.addTransaction(transaction);
-        } catch (InvalidFundingAmountException e) {
-            System.out.println("Da vuot qua so tien cho phep rut - " + e.getMessage());
-        } catch (InsufficientFundsException e) {
-            System.out.println("Khong du so du toi thieu - " + e.getMessage());
+        } catch (BankException e) {
+            System.out.println(e.getMessage());
         }
-    }
 
     /**Deposit money.
      *

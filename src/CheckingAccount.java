@@ -11,7 +11,7 @@ public class CheckingAccount extends Account {
                     amount, balance - amount,
                     balance);
             super.addTransaction(transaction);
-        } catch (InvalidFundingAmountException e) {
+        } catch (BankException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -23,9 +23,7 @@ public class CheckingAccount extends Account {
             Transaction transaction = new Transaction(Transaction.TYPE_WITHDRAW_CHECKING,
                     amount, balance + amount, balance);
             super.addTransaction(transaction);
-        } catch (InvalidFundingAmountException e) {
-            System.out.println(e.getMessage());
-        } catch (InsufficientFundsException e) {
+        } catch (BankException e) {
             System.out.println(e.getMessage());
         }
     }
